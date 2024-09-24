@@ -1,44 +1,30 @@
-async function createMessage() {
-    const message = document.getElementById("message").value;
-    console.log(message);
+import { createMessage, getMessages } from "./api/messageApi.js";
 
-    const url = "http://127.0.0.1:3000"
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify({ message }),
-      });
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-  
-      const json = await response.json();
-      console.log(json);
-    } catch (error) {
-      console.error(error.message);
-    }
-  }
-
-  async function getMessages() {
-    const url = "http://127.0.0.1:3000"
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-  
-      const json = await response.json();
-      console.log(json);
-    } catch (error) {
-      console.error(error.message);
-    }
-  }
-
-  document.getElementById("messageForm").addEventListener("submit", async (event) => {
+document.getElementById("messageForm").addEventListener("submit", async (event) => {
     event.preventDefault();
-    await createMessage();
+
+    const messageText = document.getElementById("message").value;
+    console.log(messageText);
+    
+    const messageObj = { message: messageText, timestamp: new Date() };
+
+    const response = await createMessage(messageObj);
+    console.log(response);
   })
 
   window.addEventListener("load", async () => {
-      await getMessages();
+      const messages = getMessages();
+      console.log(messages);
+
+      messages.forEach((message) => {
+        let temp = document.getElementById("messageTemplate");
+        let clone = temp.content.cloneNode(true);
+
+        clone.querySelector(".text").textContent = message.text;
+        clone.querySelector(".timestamp").textContent = message.timestamp.toString("dd/MM/yyyy HH:mm:ss");
+        //clone.querySelector(".image").src = message.imageUrl
+
+        document.getElementById("output").appendChild(clone);
+      })
+      
   })
