@@ -17,7 +17,6 @@ export async function createMessage(message) {
     } catch (error) {
       console.error(error.message);
     }
-    
   }
 
   export async function getMessages() {

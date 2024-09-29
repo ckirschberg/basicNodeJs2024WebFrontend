@@ -26,5 +26,4 @@ document.getElementById("messageForm").addEventListener("submit", async (event) 
 
         document.getElementById("output").appendChild(clone);
       })
-      
   })
