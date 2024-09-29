@@ -6,14 +6,14 @@ document.getElementById("messageForm").addEventListener("submit", async (event) 
     const messageText = document.getElementById("message").value;
     console.log(messageText);
     
-    const messageObj = { message: messageText, timestamp: new Date() };
+    const messageObj = { text: messageText, timestamp: new Date() };
 
     const response = await createMessage(messageObj);
     console.log(response);
   })
 
   window.addEventListener("load", async () => {
-      const messages = getMessages();
+      const messages = await getMessages();
       console.log(messages);
 
       messages.forEach((message) => {
