@@ -5,7 +5,8 @@ export async function createMessage(message) {
     try {
       const responseJson = await fetch(url, {
         method: "POST",
-        body: message,
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(message),
       });
       if (!responseJson.ok) {
         throw new Error(`Response status: ${responseJson.status}`);
