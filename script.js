@@ -7,11 +7,10 @@ document.getElementById("messageForm").addEventListener("submit", async (event) 
     console.log(messageText);
     
     const messageObj = { text: messageText, timestamp: new Date() };
+    populateTemplate(messageObj);
 
     const response = await createMessage(messageObj);
     console.log(response);
-
-    populateTemplate(response);
   })
 
   window.addEventListener("load", async () => {

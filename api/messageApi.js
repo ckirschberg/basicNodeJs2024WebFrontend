@@ -8,11 +8,15 @@ export async function createMessage(message) {
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify(message),
       });
-      if (!responseJson.ok) {
-        throw new Error(`Response status: ${responseJson.status}`);
-      }
+      // if (!responseJson.ok) {
+        // console.log(responseJson);
+        
+        // throw new Error(`Response status: ${responseJson.status}`);
+      // }
   
       const response = await responseJson.json();
+      console.log(response);
+      
       return response;
     } catch (error) {
       console.error(error.message);
