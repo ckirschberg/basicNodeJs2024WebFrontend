@@ -10,6 +10,8 @@ document.getElementById("messageForm").addEventListener("submit", async (event) 
 
     const response = await createMessage(messageObj);
     console.log(response);
+
+    populateTemplate(response);
   })
 
   window.addEventListener("load", async () => {
@@ -17,7 +19,12 @@ document.getElementById("messageForm").addEventListener("submit", async (event) 
       console.log(messages);
 
       messages.forEach((message) => {
-        let temp = document.getElementById("messageTemplate");
+        populateTemplate(message);
+      })
+  })
+
+  function populateTemplate(message) {
+    let temp = document.getElementById("messageTemplate");
         let clone = temp.content.cloneNode(true);
 
         clone.querySelector(".text").textContent = message.text;
@@ -25,5 +32,4 @@ document.getElementById("messageForm").addEventListener("submit", async (event) 
         //clone.querySelector(".image").src = message.imageUrl
 
         document.getElementById("output").appendChild(clone);
-      })
-  })
+  }
